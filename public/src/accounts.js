@@ -7,18 +7,16 @@ return foundAccnt;
 function sortAccountsByLastName(accounts) {
   const order = [...accounts];
   order.sort((a, b) => a.name.last.toLowerCase() > b.name.last.toLowerCase() ? 1 : -1);
-  console.log(order)
   return order;
 }
 
 function getTotalNumberOfBorrows(account, books) {
   const aID = account.id;
-  return books.reduce((total, {borrows}) => {
+  const borrowedBooks = books.reduce((total, {borrows}) => {
     borrows.some((record) => record.id === aID) ? total++ : 0;
-    console.log(borrows);
-    //console.log(total)
     return total;
   }, 0);
+  return borrowedBooks;
 }
 
 function getBooksPossessedByAccount(account, books, authors) {
@@ -27,7 +25,6 @@ function getBooksPossessedByAccount(account, books, authors) {
   //map the author object to all of the filtered books
   const remap = filtered.map((book) => {
     book["author"] = authors.find((author) => author.id === book.authorId);
-    console.log(book)
     return book;
   });
   return remap;
